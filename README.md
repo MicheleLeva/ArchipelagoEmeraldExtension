@@ -9,6 +9,6 @@ It works only with patched .gba generated through Archipelago, refer to the Arch
 
 ## Usage:
 
-1. Download the `Archipelago Emerald.json` and `ArchipelagoEmeraldExtension.lua` files
+1. Download and extract the `Archipelago Emerald.json` and `ArchipelagoEmeraldExtension.lua` files from the latest [release](https://github.com/MicheleLeva/ArchipelagoEmeraldExtension/releases)
 2. Move them to your tracker extension folder
 3. Follow the official tracker [guide](https://github.com/besteon/Ironmon-Tracker/wiki/Tracker-Add-ons#custom-code-extensions) to enable the extension
