@@ -5,7 +5,7 @@ local function ArchipelagoEmerald()
 	self.name = "Archipelago Emerald"
 	self.author = "WollyTD"
 	self.description = "Extension that allows for compatibility with the randomized Emerald ROM hack for Archipelago runs."
-	self.github = "MyUsername/ExtensionRepo" -- Replace "MyUsername" and "ExtensionRepo" to match your GitHub repo url, if any
+	self.github = "MicheleLeva/ArchipelagoEmeraldExtension" -- Replace "MyUsername" and "ExtensionRepo" to match your GitHub repo url, if any
 	self.url = string.format("https://github.com/%s", self.github or "") -- Remove this attribute if no host website available for this extension
 
 	self.jsonpath = "Archipelago Emerald.json"
@@ -88,5 +88,6 @@ local function ArchipelagoEmerald()
 		Utils.printDebug("Emerald Extension is not active anymore!")
 	end
 
+	return self
 end
 return ArchipelagoEmerald
