@@ -8,7 +8,7 @@ local function ArchipelagoEmerald()
 	self.github = "MicheleLeva/ArchipelagoEmeraldExtension" -- Replace "MyUsername" and "ExtensionRepo" to match your GitHub repo url, if any
 	self.url = string.format("https://github.com/%s", self.github or "") -- Remove this attribute if no host website available for this extension
 
-	self.jsonpath = "Archipelago Emerald.json"
+	self.jsonpath = "ArchipelagoEmerald.json"
     local DEBUG_MESSAGES_ON = false
 
 	--------------------------------------
@@ -32,16 +32,20 @@ local function ArchipelagoEmerald()
 
 	-- Executed only once: When the extension is enabled by the user, and/or when the Tracker first starts up, after it loads all other required files and code
 	function self.startup()
+		Utils.printDebug("Loading Archipelago Emerald Extension...")
+		Utils.printDebug("Importing new addresses from JSON")
 		if DEBUG_MESSAGES_ON then
-			Utils.printDebug("Loading Archipelago Emerald Extension...")
-			Utils.printDebug("Importing new addresses from JSON")
 			-- Utils.printDebug("Testing Address gameStatsOffset: %x", GameSettings.gameStatsOffset or 0)
 			Utils.printDebug("Testing Address pStats: %x", GameSettings.pstats or 0)
 		end
 		local filepath = FileManager.Folders.Custom .. FileManager.slash .. self.jsonpath
 		local success = TrackerAPI.loadGameSettingsFromJson(filepath)
+		if not success then
+			Utils.printDebug("Failed to load JSON file: %s", filepath)
+			return
+		end
+		Utils.printDebug("Import complete, success: %s.", tostring(success))
 		if DEBUG_MESSAGES_ON then
-			Utils.printDebug("Import complete, success: %s.", tostring(success))
 			-- Utils.printDebug("Testing Address gameStatsOffset: %x", GameSettings.gameStatsOffset or 0)
 			Utils.printDebug("Testing Address pStats: %x", GameSettings.pstats or 0)
 		end
@@ -57,20 +61,20 @@ local function ArchipelagoEmerald()
 		AbilityData.updateResources()
 		MiscData.updateResources()
 
-		Utils.printDebug("Emerald Extension is active!")
+		Utils.printDebug("Archipelago Emerald Extension is active!")
 	end
 
 	-- Executed only once: When the extension is disabled by the user, necessary to undo any customizations, if able
 	function self.unload()
-		if DEBUG_MESSAGES_ON then
-			Utils.printDebug("Unloading Archipelago Emerald Extension...")
-			Utils.printDebug("Importing default addresses from JSON")
+		Utils.printDebug("Unloading Archipelago Emerald Extension...")
+		Utils.printDebug("Importing default addresses from JSON")
+		if DEBUG_MESSAGES_ON then	
 			Utils.printDebug("Testing Address gameStatsOffset: %x", GameSettings.gameStatsOffset or 0)
 		end
 		-- this is the way GameSettings uses to load the default addresses
-		local success = GameSettings.importAddressesFromJson()
+		local success = GameSettings.importAddressesFromJson()		
+		Utils.printDebug("Import complete, success: %s.", tostring(success))
 		if DEBUG_MESSAGES_ON then
-			Utils.printDebug("Import complete, success: %s.", tostring(success))
 			Utils.printDebug("Testing Address gameStatsOffset: %x", GameSettings.gameStatsOffset or 0)
 		end
 
@@ -85,7 +89,7 @@ local function ArchipelagoEmerald()
 		AbilityData.updateResources()
 		MiscData.updateResources()
 
-		Utils.printDebug("Emerald Extension is not active anymore!")
+		Utils.printDebug("Archipelago Emerald Extension is not active anymore!")
 	end
 
 	return self
